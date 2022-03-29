@@ -51,7 +51,7 @@ static void logic(void)
 
 static void draw(void)
 {
-	SDL_SetRenderDrawColor(app.renderer, 128, 0, 255, 255);
+	SDL_SetRenderDrawColor(app.renderer, 54, 199, 242, 255);
 	SDL_RenderFillRect(app.renderer, NULL);
 
 	drawMap();
@@ -68,6 +68,7 @@ static void drawHud(void)
 	r.x = 0;
 	r.y = 0;
 	r.w = SCREEN_WIDTH;
+	r.w = SCREEN_WIDTH;
 	r.h = 35;
 
 	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_BLEND);
@@ -75,5 +76,15 @@ static void drawHud(void)
 	SDL_RenderFillRect(app.renderer, &r);
 	SDL_SetRenderDrawBlendMode(app.renderer, SDL_BLENDMODE_NONE);
 
-	drawText(SCREEN_WIDTH - 5, 5, 255, 255, 255, TEXT_RIGHT, "PIZZA %d/%d", stage.pizzaFound, stage.pizzaTotal);
+
+	drawText(SCREEN_WIDTH - 5, 5, 255, 255, 255, TEXT_RIGHT, "HOTDOG %d/%d", stage.pizzaFound, stage.pizzaTotal);
+
+	drawText(5, 5, 255, 255, 255, TEXT_LEFT, "TIMER %d:%d:%d", min, sec, ms);
+
+	if (timeron == 1){
+		SDL_Texture* WIN;  //if the player collects all of the hotdogs
+		WIN = loadTexture("gfx/WIN.png");
+		blit(WIN, 356, 111, 0);
+		presentScene();
+	}
 }

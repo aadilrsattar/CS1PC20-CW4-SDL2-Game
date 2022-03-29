@@ -31,8 +31,12 @@ void initMap(void)
 	memset(&stage.map, 0, sizeof(int) * MAP_WIDTH * MAP_HEIGHT);
 
 	loadTiles();
-
-	loadMap("data/map01.dat");
+	if (app.map_selection == 0){
+		loadMap("data/easy.dat");
+	}
+	else if (app.map_selection == 1) {
+		loadMap("data/hard.dat");
+	}
 }
 
 void drawMap(void)
@@ -78,7 +82,7 @@ static void loadTiles(void)
 
 	for (i = 1 ; i <= MAX_TILES ; i++)
 	{
-		sprintf(filename, "gfx/tile%d.png", i);
+		sprintf(filename, "gfx/tiles/tile%d.png", i);
 
 		tiles[i] = loadTexture(filename);
 	}

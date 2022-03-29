@@ -36,7 +36,7 @@ void initPizza(char *line)
 
 	e->health = 1;
 
-	e->texture = loadTexture("gfx/pizza.png");
+	e->texture = loadTexture("gfx/hotdog.png");
 	SDL_QueryTexture(e->texture, NULL, NULL, &e->w, &e->h);
 	e->flags = EF_WEIGHTLESS;
 	e->tick = tick;
@@ -63,7 +63,8 @@ static void touch(Entity *other)
 		if (stage.pizzaFound == stage.pizzaTotal)
 		{
 			playSound(SND_PIZZA_DONE, CH_PIZZA);
-			exit(1);
+			timeron = 1;                         // added this to allow for more 
+
 		}
 		else
 		{

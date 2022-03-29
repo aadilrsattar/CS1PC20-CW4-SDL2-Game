@@ -14,9 +14,9 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
-
 #include <defs.h>
 #include <structs.h>
+#include <time.h>
 
 
 char * global_dir;
@@ -56,6 +56,10 @@ void playMusic(int loop);
 void playSound(int id, int channel);
 void prepareScene(void);
 void presentScene(void);
+int ms;
+int sec;
+int min;
+int timeron;
 
 #ifdef __cplusplus
 }

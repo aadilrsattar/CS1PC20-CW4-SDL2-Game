@@ -4,4 +4,4 @@
        stage.obj
        MSVCRTD.lib(loadcfg.obj)
   Finished pass 2
-  SpringProject.vcxproj -> C:\Users\wo917566\Source\Repos\projTest\project\visual-studio\SpringProjectx\x64\Debug\SpringProject.exe
+  SpringProject.vcxproj -> C:\Users\aadam\source\Repos\cs1pr-portfolio\SpringProjectx\x64\Debug\SpringProject.exe

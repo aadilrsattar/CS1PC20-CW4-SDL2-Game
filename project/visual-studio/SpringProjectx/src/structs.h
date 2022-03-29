@@ -38,9 +38,13 @@ typedef struct {
 	Delegate delegate;
 	int keyboard[MAX_KEYBOARD_KEYS];
 	Texture textureHead, *textureTail;
+	int state;
+	int map_selection;
+
 } App;
 
 struct Entity {
+	int Jump;
 	float x;
 	float y;
 	int w;

@@ -29,7 +29,13 @@ static void addEntFromLine(char *line);
 
 void initEntities(void)
 {
-	loadEnts("data/ents01.dat");
+	if (app.map_selection == 0) {
+		loadEnts("data/easy_ents.dat");
+	}
+	else if (app.map_selection == 1) {
+		loadEnts("data/hard_ents.dat");
+	}
+	
 }
 
 void doEntities(void)
@@ -185,47 +191,98 @@ static void moveToEntities(Entity *e, float dx, float dy)
 
 	for (other = stage.entityHead.next ; other != NULL ; other = other->next)
 	{
-		if (other != e && collision(e->x, e->y, e->w, e->h, other->x, other->y, other->w, other->h))
+		if (!other->sy) 
 		{
-			if (other->flags & EF_SOLID)
+
+
+			if (other != e && collision(e->x, e->y, e->w, e->h, other->x, other->y, other->w, other->h))
 			{
-				if (dy != 0)
+				if (other->flags & EF_SOLID)
 				{
-					adj = dy > 0 ? -e->h : other->h;
-
-					e->y = other->y + adj;
-
-					e->dy = 0;
-
-					if (dy > 0)
+					if (dy != 0)
 					{
-						e->isOnGround = 1;
+						adj = dy > 0 ? -e->h : other->h;
 
-						e->riding = other;
+						e->y = other->y + adj;
+
+						e->dy = 0;
+
+						if (dy > 0)
+						{
+							e->isOnGround = 1;
+
+							e->riding = other;
+						}
+					}
+
+					if (dx != 0)
+					{
+						adj = dx > 0 ? -e->w : other->w;
+
+						e->x = other->x + adj;
+
+						e->dx = 0;
 					}
 				}
-
-				if (dx != 0)
+				else if (e->flags & EF_PUSH && other!=player)
 				{
-					adj = dx > 0 ? -e->w : other->w;
+					other->x += e->dx;
+					push(other, e->dx, 0);
 
-					e->x = other->x + adj;
+					other->y += e->dy;
+					push(other, 0, e->dy);
+				}
 
-					e->dx = 0;
+				if (e->touch)
+				{
+					e->touch(other);
 				}
 			}
-			else if (e->flags & EF_PUSH)
+		}
+		else
+		{
+			if (other != e && e==player && collision(e->x, e->y+e->h, e->w, e->h, other->x, other->y, other->w, other->h))
 			{
-				other->x += e->dx;
-				push(other, e->dx, 0);
+				if (other->flags & EF_SOLID)
+				{
+					if (dy > 0)
+					{
+						adj = dy > 0 ? -e->h : other->h;
 
-				other->y += e->dy;
-				push(other, 0, e->dy);
-			}
+						e->y = other->y + adj;
 
-			if (e->touch)
-			{
-				e->touch(other);
+						e->dy = 0;
+
+						if (dy > 0)
+						{
+							e->isOnGround = 1;
+
+							e->riding = other;
+						}
+					}
+
+					if (dx != 0 && e != player)
+					{
+						adj = dx > 0 ? -e->w : other->w;
+
+						e->x = other->x + adj;
+
+						e->dx = 0;
+					}
+				}
+				/*else if (e->flags & EF_PUSH)
+				{
+					other->x += e->dx;
+					push(other, e->dx, 0);
+
+					other->y += e->dy;
+					push(other, 0, e->dy);
+				}*/
+
+				if (e->touch)
+				{
+					e->touch(other);
+				}
 			}
 		}
 	}
