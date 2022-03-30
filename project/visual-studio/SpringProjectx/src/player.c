@@ -132,10 +132,7 @@ void doPlayer(void)
 	}
 	if (app.keyboard[SDL_SCANCODE_ESCAPE]) {
 		SDL_Quit();
-		timeron = 0;
-		ms = 0;
-		sec = 0;
-		min = 0;
+		timeron = 0; ms = 0; sec = 0; min = 0;//resets timer function
 		WinMain(); // escapes the game and goes back to main menu
 
 	}

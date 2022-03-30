@@ -82,7 +82,7 @@ static void loadTiles(void)
 
 	for (i = 1 ; i <= MAX_TILES ; i++)
 	{
-		sprintf(filename, "gfx/tiles/tile%d.png", i);
+		sprintf(filename, "gfx/tiles/tile%d.png", i); //changed the locations of the tiles to allow for easier access
 
 		tiles[i] = loadTexture(filename);
 	}

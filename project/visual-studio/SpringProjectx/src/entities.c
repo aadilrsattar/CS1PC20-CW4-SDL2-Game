@@ -276,12 +276,12 @@ static void moveToEntities(Entity *e, float dx, float dy)
 					push(other, e->dx, 0);
 
 					other->y += e->dy;
-					push(other, 0, e->dy);
+					push(other, 0, e->dy);  
 				}*/
 
 				if (e->touch)
 				{
-					e->touch(other);
+					e->touch(other);										// i edited this to allow for the platforms to work properlu when moving diagonally
 				}
 			}
 		}

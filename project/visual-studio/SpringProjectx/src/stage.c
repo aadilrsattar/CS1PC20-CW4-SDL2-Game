@@ -79,7 +79,7 @@ static void drawHud(void)
 
 	drawText(SCREEN_WIDTH - 5, 5, 255, 255, 255, TEXT_RIGHT, "HOTDOG %d/%d", stage.pizzaFound, stage.pizzaTotal);
 
-	drawText(5, 5, 255, 255, 255, TEXT_LEFT, "TIMER %d:%d:%d", min, sec, ms);
+	drawText(5, 5, 255, 255, 255, TEXT_LEFT, "TIMER %d:%d:%d", min, sec, ms); //added the output for the timer at the top of the screen
 
 	if (timeron == 1){
 		SDL_Texture* WIN;  //if the player collects all of the hotdogs
